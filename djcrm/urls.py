@@ -42,8 +42,8 @@ urlpatterns = [
     path('lead/', include("leads.urls")),
     path('agent/', include("agents.urls")),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += debug_toolbar_urls()
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

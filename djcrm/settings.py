@@ -121,7 +121,7 @@ def set_schema(schema_name):
     with connection.cursor() as cursor:
         cursor.execute(f"SET search_path TO {schema_name}")
 
-set_schema(env('SCHEMA_NAME'))
+set_schema(env('DB_SCHEMA'))
 
 
 # Password validation
