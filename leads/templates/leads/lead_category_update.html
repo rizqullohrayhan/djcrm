@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load tailwind_filters %}
+
+{% block content %}
+
+<section class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="lg:w-4/5 mx-auto flex flex-wrap">
+            <div class="w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+                <div class="w-full flex items-center justify-between space-x-6">
+                    <div class="flex-1 truncate">
+                        <h2 class="text-sm title-font text-gray-500 tracking-widest">Lead</h2>
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-3xl text-gray-900 font-medium truncate">{{ lead }}</h3>
+                        </div>
+                    </div>
+                    {% if lead.profile_picture %}
+                    <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="{{ lead.profile_picture.url }}" alt="">
+                    {% endif %}
+                </div>
+
+                <div class="flex mb-4">
+                    <a href="{% url 'leads:detail' lead.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+                        Description
+                    </a>
+                    <a href="{% url 'leads:assign_category' lead.id %}"
+                        class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
+                        Category
+                    </a>
+                    <a href="{% url 'leads:update' lead.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+                        Update
+                    </a>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="flex mt-4">
+                        <button type="submit"
+                            class="w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

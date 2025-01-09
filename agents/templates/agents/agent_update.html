@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load tailwind_filters %}
+
+{% block content %}
+
+<section class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="lg:w-4/5 mx-auto flex flex-wrap">
+            <div class="w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+                <h2 class="text-sm title-font text-gray-500 tracking-widest">Agent</h2>
+                <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">
+                    {{ agent.user.username }}
+                </h1>
+                <div class="flex mb-4">
+                    <a href="{% url 'agents:detail' agent.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+                        Description
+                    </a>
+                    <a href="{% url 'agents:update' agent.id %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-300 py-2 text-lg px-1">
+                        Update
+                    </a>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="flex mt-4">
+                        <button type="submit"
+                            class="w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
